@@ -1,3 +1,8 @@
+#!/usr/bin/python
+
+import serial
+import pygame
+import time
 
 try:
 	while (True):
