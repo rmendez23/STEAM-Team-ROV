@@ -4,6 +4,8 @@ import serial
 import pygame
 import time
 
+import socket
+
 '''
 Gets joystick data and prints it
 '''
