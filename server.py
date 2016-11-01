@@ -22,6 +22,6 @@ while True:
     clientsocket,addr = serversocket.accept()      
 
     print("Got a connection from %s" % str(addr))
-    currentTime = time.ctime(time.time()) + "\r\n"
-    clientsocket.send(currentTime.encode('ascii'))
+    currentTime = time.ctime(time.time()) + "\r\n" #Need to put data in here? --Rebecca Mendez
+    clientsocket.send(currentTime.encode('ascii')) # And then send it here?
     clientsocket.close()
