@@ -22,20 +22,27 @@ print 'Initialized Joystick : %s' % j.get_name()
 button_history = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 try:
+	#client socket		
+	host = socket.gethostname() #change to IP of server   
+	port = 12345                   # The same port as used by the server
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
+	s.connect((host, port)) #connect to server
 	while (True):
-		pygame.event.pump()
-		newSpeed = -250.0*j.get_axis(4)
-		print (newSpeed)
+		try:
+			pygame.event.pump()
+			newSpeed = -250.0*j.get_axis(4)
+			print (newSpeed)
+			s.sendall(b'Hello, world') #newSpeed in here? s.sendall(newSpeed)
+			data = s.recv(1024)
+			print('Received', repr(data))
+		except KeyboardInterrupt:
+			j.quit()
+		except Error as err:
+			print ("Error in loop:", repr(err))
+			j.quit()
+	s.close()
 
-#client socket		
-host = socket.gethostname()    
-port = 12345                   # The same port as used by the server
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
-s.connect((host, port)) #connect to server
-s.sendall(b'Hello, world') #newSpeed in here? s.sendall(newSpeed)
-data = s.recv(1024)
-s.close()
-print('Received', repr(data))
+
 
 except KeyboardInterrupt:
 	j.quit()
