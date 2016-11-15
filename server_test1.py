@@ -12,9 +12,9 @@ s.listen(1)
 conn, addr = s.accept() #establishes connection?
 print('Connected by', addr)
 while True:
-	data = conn.recv(1024) #recieving data? data is newSpeed?
-	if not data: break
-	conn.sendall(data) # This sends the data recieved back to the client?
+	newSpeed = conn.recv(1024) #recieving data? data is newSpeed?
+	if not newSpeed: break
+	conn.sendall(newSpeed) # This sends the data recieved back to the client?
 	
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT(addr=0x60)
