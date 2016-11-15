@@ -15,30 +15,30 @@ while True:
 	data = conn.recv(1024) #recieving data? data is newSpeed?
 	if not data: break
 	conn.sendall(data) # This sends the data recieved back to the client?
-conn.close() #move this?
-
-# create a default object, no changes to I2C address or frequency
-mh = Adafruit_MotorHAT(addr=0x60)
-
-# recommended for auto-disabling motors on shutdown!
-def turnOffMotors():
-	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
-	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
-	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
-	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
-
-atexit.register(turnOffMotors)
-
-myMotor = mh.getMotor(3)
-
-# set the speed to start, from 0 (off) to 255 (max speed)
-myMotor.setSpeed(0)
-
-if newSpeed<0:
-	myMotor.run(Adafruit_MotorHAT.BACKWARD)
-	print (newSpeed) #dont need?
-	myMotor.setSpeed(int(-newSpeed))
 	
-if newSpeed>0:
-	myMotor.run(Adafruit_MotorHAT.FORWARD)
-	print (newSpeed)myMotor.setSpeed(int(newSpeed))
+	# create a default object, no changes to I2C address or frequency
+	mh = Adafruit_MotorHAT(addr=0x60)
+
+	# recommended for auto-disabling motors on shutdown!
+	def turnOffMotors():
+		mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+		mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+
+	atexit.register(turnOffMotors)
+
+	myMotor = mh.getMotor(3)
+
+	# set the speed to start, from 0 (off) to 255 (max speed)
+	myMotor.setSpeed(0)
+
+	if newSpeed<0:
+		myMotor.run(Adafruit_MotorHAT.BACKWARD)
+		print (newSpeed) #dont need?
+		myMotor.setSpeed(int(-newSpeed))
+
+	if newSpeed>0:
+		myMotor.run(Adafruit_MotorHAT.FORWARD)
+		print (newSpeed)myMotor.setSpeed(int(newSpeed))
+conn.close() #move this?
