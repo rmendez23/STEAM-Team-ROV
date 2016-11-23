@@ -23,7 +23,7 @@ button_history = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 try:
 	#client socket		
-	host = '10.66.66.6' #socket.gethostname() change to IP of server   
+	host = '10.66.66.1' #socket.gethostname() change to IP of server   
 	port = 12345                   # The same port as used by the server
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
 	s.connect((host, port)) #connect to server
@@ -32,7 +32,7 @@ try:
 			pygame.event.pump()
 			newSpeed = -250.0*j.get_axis(4)
 			print (newSpeed)
-			s.sendall(b'Hello, world') #newSpeed in here? s.sendall(newSpeed)
+			s.sendall(newSpeed) #newSpeed in here? s.sendall(newSpeed)
 			data = s.recv(1024)
 			print('Received', repr(data))
 		except KeyboardInterrupt:
