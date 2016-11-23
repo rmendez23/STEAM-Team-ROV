@@ -23,7 +23,7 @@ button_history = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 try:
 	#client socket		
-	host = '192.168.74.1' #socket.gethostname() change to IP of server   
+	host = '10.66.66.6' #socket.gethostname() change to IP of server   
 	port = 12345                   # The same port as used by the server
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
 	s.connect((host, port)) #connect to server
