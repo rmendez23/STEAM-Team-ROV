@@ -27,14 +27,14 @@ try:
 	port = 12345                   # The same port as used by the server
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
 	s.connect((host, port)) #connect to server
-	while (True):
+	while (True): 
 		try:
 			pygame.event.pump()
-			newSpeed = -250.0*j.get_axis(4)
+			newSpeed = -250.0*j.get_axis(4) #FORWARD AND BACKWARD
 			print (newSpeed)
-			s.sendall(str(newSpeed)) #newSpeed in here? s.sendall(newSpeed)
+			s.sendall(str(newSpeed))
 			data = s.recv(1024)
-			print('Received', repr(data))
+			#print('Received', repr(data))
 		except KeyboardInterrupt:
 			break
 		except:
