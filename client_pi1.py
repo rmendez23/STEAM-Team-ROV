@@ -36,11 +36,12 @@ try:
 			data = s.recv(1024)
 			print('Received', repr(data))
 		except KeyboardInterrupt:
-			j.quit()
-		except Error as err:
-			print ("Error in loop:", repr(err))
-			j.quit()
+			break
+		except:
+			print("Unexpected error:", sys.exc_info()[0])
+			break
 	s.close()
+	j.quit()
 
 
 
