@@ -32,7 +32,7 @@ try:
 			pygame.event.pump()
 			newSpeed = -250.0*j.get_axis(4)
 			print (newSpeed)
-			s.sendall(newSpeed) #newSpeed in here? s.sendall(newSpeed)
+			s.sendall(str(newSpeed)) #newSpeed in here? s.sendall(newSpeed)
 			data = s.recv(1024)
 			print('Received', repr(data))
 		except KeyboardInterrupt:
