@@ -13,9 +13,9 @@ Gets joystick data and prints it
 '''
 pygame.init()
 #joystick.init()
-hat_number = get_numhats() - 1
 j = pygame.joystick.Joystick(0)
 j.init()
+hat_number = get_numhats() - 1
 print 'Initialized Joystick : %s' % j.get_name()
 
 # Keeps a history of buttons pressed so that one press does
