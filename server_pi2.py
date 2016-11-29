@@ -97,7 +97,7 @@ while True:
 		myMotor1.run(Adafruit_MotorHAT.FORWARD)
 		print("Going Up!", newSpeed3)
 
-	elif newSpeed<0: #DOWN
+	elif newSpeed3<0: #DOWN
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
 		print("Going Down!", newSpeed3)
 
