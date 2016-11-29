@@ -44,7 +44,7 @@ while True:
 	elif dictCommand["command"] == "UD":
 		newSpeed3 = float(dictCommand["speed"]) #Up or Down
 		#print("'"+command+"'")
-	#else if?
+		
 	#if not newSpeed: break #what should I do here?
 	#conn.sendall(newSpeed1) # This sends the data recieved back to the client? Is this needed?
 	
