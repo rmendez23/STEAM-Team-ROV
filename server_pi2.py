@@ -5,6 +5,19 @@ import socket
 from ast import literal_eval
 #do I need to import pygame?
 
+recvBuf = ''
+
+def recvNice(conn):
+	global recvBuf
+	idx = "\n".indexOf(recvBuf)
+	if idx<0:
+		data = conn.recv(1024)
+		recvBuf = recvBuf + data
+		return recvNice(conn)
+	ret = recvBuf[:idx]
+	recvBuf = recvBuf[(idx+1):]
+	return ret
+
 host = ''        # Symbolic name meaning all available interfaces
 port = 12345     # Arbitrary non-privileged port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,7 +30,7 @@ newSpeed2 = 0.0
 newSpeed3 = 0.0
 while True:
 	#literal_eval to turn the TCP message back into a dictionary.
-	command = conn.recv(1024) #Recieve data from socket
+	command = recvNice(conn) #Recieve data from socket
 	print(command)
 	dictCommand = literal_eval(command)
 	if dictCommand["command"] == "FB": #Forward or Backward
