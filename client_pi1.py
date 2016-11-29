@@ -5,6 +5,7 @@
 import serial
 import pygame
 import time
+import sys
 
 import socket
 
@@ -47,7 +48,7 @@ try:
 		except KeyboardInterrupt:
 			break
 		except:
-			print("Unexpected error:", sys.exc_info()[0])
+			print("Unexpected error:", sys.exec_info()[0])
 			break
 	s.close()
 	j.quit()
