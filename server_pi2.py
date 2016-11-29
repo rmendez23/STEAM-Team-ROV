@@ -97,7 +97,7 @@ while True:
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
 		print("Going Down!", newSpeed3)
 
-	elif: #RELEASE
+	else: #RELEASE
 		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 		print("No action, waiting for command.")
 conn.close() #move this?
