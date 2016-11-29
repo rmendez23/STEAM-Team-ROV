@@ -55,10 +55,6 @@ try:
 				newSpeed1 = -250.0*j.get_axis(4)
 			
 				newSpeed2 = -250.0*j.get_axis(0)
-			 
-				print (newSpeed1)
-				
-				print (newSpeed2)
 				
 				#FORWARD and BACKWARD
 				if newSpeed1<0: #BOTH BACKWARD
