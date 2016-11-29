@@ -12,6 +12,9 @@ s.bind((host, port))
 s.listen(1)
 conn, addr = s.accept() #establishes connection?
 print('Connected by', addr)
+newSpeed1 = 0.0
+newSpeed2 = 0.0
+newSpeed3 = 0.0
 while True:
 	#literal_eval to turn the TCP message back into a dictionary.
 	command = conn.recv(1024) #Recieve data from socket
