@@ -23,7 +23,7 @@ while True:
 	if dictCommand["command"] == "UD":
 		newSpeed3 = float(dictCommand["speed"]) #Up or Down
 	#else if?
-	if not newSpeed: break #what should I do here?
+	#if not newSpeed: break #what should I do here?
 	#conn.sendall(newSpeed1) # This sends the data recieved back to the client? Is this needed?
 	
 	# create a default object, no changes to I2C address or frequency
