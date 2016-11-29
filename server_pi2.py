@@ -61,7 +61,7 @@ while True:
 		
 		conn.sendall(repr({"message":["Backward!"], "speed" : [newSpeed1]})
 
-	else if newSpeed1>0: #BOTH FORWARD
+	elif newSpeed1>0: #BOTH FORWARD
 
 		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.FORWARD)
 
@@ -69,7 +69,7 @@ while True:
 
 		myMotor3.setSpeed(int(newSpeed1)), myMotor2.setSpeed(int(newSpeed1))
 	#RIGHT and LEFT
-	else if newSpeed2<0: #LEFT
+	elif newSpeed2<0: #LEFT
 
 		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 
@@ -78,7 +78,7 @@ while True:
 		myMotor3.setSpeed(int(-newSpeed2))
 
 		print("Turning left!", newSpeed2)
-	else if newSpeed2>0: #RIGHT
+	elif newSpeed2>0: #RIGHT
 
 		myMotor2.run(Adafruit_MotorHAT.FORWARD), myMotor3.run(Adafruit_MotorHAT.RELEASE)
 
@@ -89,15 +89,15 @@ while True:
 		print("Turning right!", newSpeed2)
 
 	#UP and DOWN
-	else if newSpeed3>0: #UP
+	elif newSpeed3>0: #UP
 		myMotor1.run(Adafruit_MotorHAT.FORWARD)
 		print("Going Up!", newSpeed3)
 
-	else if: newSpeed<0: #DOWN
+	elif: newSpeed<0: #DOWN
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
 		print("Going Down!", newSpeed3)
 
-	else: #RELEASE
+	elif: #RELEASE
 		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 		print("No action, waiting for command.")
 conn.close() #move this?
