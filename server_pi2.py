@@ -42,7 +42,7 @@ while True:
 
 	myMotor2 = mh.getMotor(2)
 
-	myMotor1 = mg.getMotor(1) #Up and Down Motor
+	myMotor1 = mh.getMotor(1) #Up and Down Motor
 
 	# set the speed to start, from 0 (off) to 255 (max speed)
 	myMotor3.setSpeed(0)
