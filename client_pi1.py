@@ -49,7 +49,7 @@ try:
 					newSpeed3 = -250.0*j.get_hat(hat_number)[1] #y position tuple of j.get_hat
 					s.sendall(reprNice({"command" : "UD", "speed" : newSpeed3}))
 		except KeyboardInterrupt:
-			break
+			j.quit()
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
 			break
