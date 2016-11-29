@@ -9,7 +9,7 @@ recvBuf = ''
 
 def recvNice(conn):
 	global recvBuf
-	idx = "\n".indexOf(recvBuf)
+	idx = "\n".find(recvBuf)
 	if idx<0:
 		data = conn.recv(1024)
 		recvBuf = recvBuf + data
