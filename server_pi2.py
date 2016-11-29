@@ -59,7 +59,7 @@ while True:
 
 		myMotor3.setSpeed(int(-newSpeed1)), myMotor2.setSpeed(int(-newSpeed1))
 		
-		conn.sendall(repr({"message":["Backward!"], "speed" : [newSpeed1]})
+		conn.sendall(repr({"message":["Backward!"], "speed" : [newSpeed1]}))
 
 	elif newSpeed1>0: #BOTH FORWARD
 
@@ -93,7 +93,7 @@ while True:
 		myMotor1.run(Adafruit_MotorHAT.FORWARD)
 		print("Going Up!", newSpeed3)
 
-	elif: newSpeed<0: #DOWN
+	elif newSpeed<0: #DOWN
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
 		print("Going Down!", newSpeed3)
 
