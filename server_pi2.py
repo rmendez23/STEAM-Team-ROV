@@ -10,8 +10,8 @@ recvBuf = ''
 def recvNice(conn):
 	global recvBuf
 	idx = "\n".find(recvBuf)
-	print("idx "+`idx`)
-	if idx<0:
+	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
+	if idx<1:
 		data = conn.recv(1024)
 		print("data '"+data+"'")
 		recvBuf = recvBuf + data
