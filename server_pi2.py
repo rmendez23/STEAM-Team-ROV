@@ -31,7 +31,7 @@ newSpeed3 = 0.0
 while True:
 	#literal_eval to turn the TCP message back into a dictionary.
 	command = recvNice(conn) #Recieve data from socket
-	print(command)
+	print("'"+command+"'")
 	dictCommand = literal_eval(command)
 	if dictCommand["command"] == "FB": #Forward or Backward
 		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
