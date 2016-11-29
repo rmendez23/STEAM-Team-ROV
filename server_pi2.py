@@ -12,10 +12,18 @@ s.listen(1)
 conn, addr = s.accept() #establishes connection?
 print('Connected by', addr)
 while True:
-	newSpeed = conn.recv(1024) #recieving data? data is newSpeed?
-	#float(newSpeed)
-	if not newSpeed: break
-	conn.sendall(newSpeed) # This sends the data recieved back to the client? Is this needed?
+	#literal_eval to turn the TCP message back into a dictionary.
+	command = conn.recv(1024) #Recieve data from socket
+	dictCommand = literal_eval(command)
+	if dictCommand["command"] == "FB": #Forward or Backward
+		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
+	if dictCommand["command"] == "LR":
+		newSpeed2 = float(dictCommand["speed"]) #Right or Left
+	if dictCommand["command"] == "UD":
+		newSpeed3 = float(dictCommand["speed"]) #Up or Down
+	#else if?
+	if not newSpeed: break #what should I do here?
+	#conn.sendall(newSpeed1) # This sends the data recieved back to the client? Is this needed?
 	
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT(addr=0x60)
@@ -29,18 +37,67 @@ while True:
 
 	atexit.register(turnOffMotors)
 
-	myMotor = mh.getMotor(3)
-	#myMotor2 = mh.getMotor(4)
+	myMotor3 = mh.getMotor(3)
+
+	myMotor2 = mh.getMotor(2)
+
+	myMotor1 = mg.getMotor(1) #Up and Down Motor
 
 	# set the speed to start, from 0 (off) to 255 (max speed)
-	myMotor.setSpeed(0)
+	myMotor3.setSpeed(0)
 
-	if newSpeed<0:
-		myMotor.run(Adafruit_MotorHAT.BACKWARD)
-		print (newSpeed) #dont need?
-		myMotor.setSpeed(int(-newSpeed))
+	myMotor2.setSpeed(0)
 
-	if newSpeed>0:
-		myMotor.run(Adafruit_MotorHAT.FORWARD)
-		print (newSpeed)myMotor.setSpeed(int(newSpeed))
+	myMotor1.setSpeed(0)
+
+	#FORWARD and BACKWARD
+	if newSpeed1<0: #BOTH BACKWARD
+
+		myMotor3.run(Adafruit_MotorHAT.BACKWARD), myMotor2.run(Adafruit_MotorHAT.BACKWARD)
+
+		print ("Backward!", newSpeed1)
+
+		myMotor3.setSpeed(int(-newSpeed1)), myMotor2.setSpeed(int(-newSpeed1))
+		
+		conn.sendall(repr({"message":["Backward!"], "speed" : [newSpeed1]})
+
+	else if newSpeed1>0: #BOTH FORWARD
+
+		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.FORWARD)
+
+		print ("Forward!", newSpeed1)
+
+		myMotor3.setSpeed(int(newSpeed1)), myMotor2.setSpeed(int(newSpeed1))
+	#RIGHT and LEFT
+	else if newSpeed2<0: #LEFT
+
+		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.RELEASE)
+
+		print (newSpeed2)
+
+		myMotor3.setSpeed(int(-newSpeed2))
+
+		print("Turning left!", newSpeed2)
+	else if newSpeed2>0: #RIGHT
+
+		myMotor2.run(Adafruit_MotorHAT.FORWARD), myMotor3.run(Adafruit_MotorHAT.RELEASE)
+
+		print (newSpeed2)
+
+		myMotor2.setSpeed(int(newSpeed2))
+
+		print("Turning right!", newSpeed2)
+
+	#UP and DOWN
+	else if newSpeed3>0: #UP
+		myMotor1.run(Adafruit_MotorHAT.FORWARD)
+		print("Going Up!", newSpeed3)
+
+	else if: newSpeed<0: #DOWN
+		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
+		print("Going Down!", newSpeed3)
+
+	else: #RELEASE
+		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
+		print("No action, waiting for command.")
 conn.close() #move this?
