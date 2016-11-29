@@ -33,14 +33,14 @@ try:
 		pygame.event.wait()
 		myEvents = pygame.event.get()
 		for e in myEvents:
-			if e.type = pygame.JOYAXISMOTION:
+			if e.type == pygame.JOYAXISMOTION:
 				newSpeed1 = -250.0*j.get_axis(4)
 				newSpeed2 = -250.0*j.get_axis(0)
 				s.sendall(repr{"command" : "FB", "speed" : newSpeed1})
 				s.sendall(repr{"command" : "LR", "speed" : newSpeed2})
 				data = s.recv(1024)
 				#print('Received', repr(data))
-			if e.type = pygame.JOYHATMOTION:
+			if e.type == pygame.JOYHATMOTION:
 				newSpeed3 = -250.0*j.get_hat(hat_number)[1] #y position tuple of j.get_hat
 				s.sendall(repr{"command" : "UD", "speed" : newSpeed3})
 		except KeyboardInterrupt:
