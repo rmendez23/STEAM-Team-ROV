@@ -33,14 +33,17 @@ newSpeed3 = 0.0
 while True:
 	#literal_eval to turn the TCP message back into a dictionary.
 	command = recvNice(conn) #Recieve data from socket
-	print("'"+command+"'")
+	#print("'"+command+"'")
 	dictCommand = literal_eval(command)
 	if dictCommand["command"] == "FB": #Forward or Backward
 		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
+		print("'"+command+"'")
 	elif dictCommand["command"] == "LR":
 		newSpeed2 = float(dictCommand["speed"]) #Right or Left
+		print("'"+command+"'")
 	elif dictCommand["command"] == "UD":
 		newSpeed3 = float(dictCommand["speed"]) #Up or Down
+		print("'"+command+"'")
 	#else if?
 	#if not newSpeed: break #what should I do here?
 	#conn.sendall(newSpeed1) # This sends the data recieved back to the client? Is this needed?
