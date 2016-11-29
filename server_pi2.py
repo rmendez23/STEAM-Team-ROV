@@ -37,9 +37,9 @@ while True:
 	dictCommand = literal_eval(command)
 	if dictCommand["command"] == "FB": #Forward or Backward
 		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
-	if dictCommand["command"] == "LR":
+	elif dictCommand["command"] == "LR":
 		newSpeed2 = float(dictCommand["speed"]) #Right or Left
-	if dictCommand["command"] == "UD":
+	elif dictCommand["command"] == "UD":
 		newSpeed3 = float(dictCommand["speed"]) #Up or Down
 	#else if?
 	#if not newSpeed: break #what should I do here?
