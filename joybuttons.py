@@ -17,6 +17,6 @@ while True:
 		myEvents = pygame.event.get()
 		for x in range(0, j.get_numbuttons()-1):
 			print(str(j.get_button(x)) + ",", end="", flush=True)
-			print ("")
+			print (" ")
 	except KeyboardInterrupt:
 		j.quit()
