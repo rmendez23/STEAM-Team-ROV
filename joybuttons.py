@@ -1,5 +1,6 @@
 import pygame
 import time
+import sys
 
 pygame.init()
 j = pygame.joystick.Joystick(0)
@@ -14,6 +15,7 @@ while True:
 		pygame.event.wait()
 		myEvents = pygame.event.get()
 		for x in range(0, j.get_numbuttons()-1):
-			print (j.get_button(x))
+			sys.stdout.write (j.get_button(x) + ",")
+			print ("")
 	except KeyboardInterrupt:
 		j.quit()
