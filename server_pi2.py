@@ -92,7 +92,7 @@ while True:
 
 		myMotor3.setSpeed(int(newSpeed1)), myMotor2.setSpeed(int(newSpeed1))
 	#RIGHT and LEFT
-	elif newSpeed2<0: #LEFT
+	if newSpeed2<0: #LEFT
 
 		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 
@@ -112,7 +112,7 @@ while True:
 		print("Turning right!", newSpeed2)
 
 	#UP and DOWN
-	elif newSpeed3>0: #UP
+	if newSpeed3>0: #UP
 		myMotor1.run(Adafruit_MotorHAT.FORWARD)
 		print("Going Up!", newSpeed3)
 
