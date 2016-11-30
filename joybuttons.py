@@ -1,7 +1,7 @@
+from __future__ import print_function
 import pygame
 import time
 import sys
-from __future__ import print_function
 
 pygame.init()
 j = pygame.joystick.Joystick(0)
