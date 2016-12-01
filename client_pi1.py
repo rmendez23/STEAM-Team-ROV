@@ -16,7 +16,7 @@ pygame.init()
 #joystick.init()
 j = pygame.joystick.Joystick(0)
 j.init()
-hat_number = j.get_numhats() - 1
+#hat_number = j.get_numhats() - 1
 print 'Initialized Joystick : %s' % j.get_name()
 
 # Keeps a history of buttons pressed so that one press does
@@ -45,9 +45,12 @@ try:
 					s.sendall(reprNice({"command" : "LR", "speed" : newSpeed2}))
 					#data = s.recv(1024)
 					#print('Received', repr(data))
-				if e.type == pygame.JOYHATMOTION:
-					newSpeed3 = 250.0*j.get_hat(hat_number)[1] #y position tuple of j.get_hat
-					s.sendall(reprNice({"command" : "UD", "speed" : newSpeed3}))
+				if e.type == pygame.JOYBUTTONDOWN:
+					newSpeed3 = 250.0*j.get_button(3) #button 
+					downSpeed = 250.0*j.get_button(0) #down button
+					s.sendall(reprNice({"command" : "U", "speed" : newSpeed3}))
+					s.sendall(reprNice({"command" : "D", "speed" : downSpeed}))
+					
 		except KeyboardInterrupt:
 			j.quit()
 		except:
