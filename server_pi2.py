@@ -41,8 +41,11 @@ while True:
 	elif dictCommand["command"] == "LR":
 		newSpeed2 = float(dictCommand["speed"]) #Right or Left
 		#print("'"+command+"'")
-	elif dictCommand["command"] == "UD":
-		newSpeed3 = float(dictCommand["speed"]) #Up or Down
+	elif dictCommand["command"] == "U":
+		newSpeed3 = float(dictCommand["speed"]) #Up
+		#print("'"+command+"'")
+	elif dictCommand["command"] == "D":
+		downSpeed = float(dictCommand["speed"]) #Down
 		#print("'"+command+"'")
 		
 	#if not newSpeed: break #what should I do here?
@@ -71,7 +74,7 @@ while True:
 
 	myMotor2.setSpeed(0)
 
-	myMotor1.setSpeed(0)
+	myMotor1.setSpeed(0) #UD Motor
 
 	#FORWARD and BACKWARD
 	if newSpeed1<0: #BOTH BACKWARD
@@ -116,9 +119,9 @@ while True:
 		myMotor1.run(Adafruit_MotorHAT.FORWARD)
 		print("Going Up!", newSpeed3)
 
-	elif newSpeed3<0: #DOWN
+	if downSpeed>0: #DOWN
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
-		print("Going Down!", newSpeed3)
+		print("Going Down!", downSpeed)
 
 	else: #RELEASE
 		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
