@@ -6,7 +6,7 @@ import serial
 import pygame
 import time
 import sys
-
+from ast import literal_eval
 import socket
 
 '''
@@ -22,6 +22,20 @@ print 'Initialized Joystick : %s' % j.get_name()
 # Keeps a history of buttons pressed so that one press does
 # not send multiple presses to the Arduino Board
 button_history = [0,0,0,0,0,0,0,0,0,0,0,0]
+
+recvBuf = ''
+def recvNice(conn):
+	global recvBuf
+	idx = recvBuf.find("\n")
+	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
+	if idx<1:
+		data = conn.recv(1024)
+		#print("data '"+data+"'")
+		recvBuf = recvBuf + data
+		return recvNice(conn)
+	ret = recvBuf[:idx]
+	recvBuf = recvBuf[(idx+1):]
+	return ret
 
 def reprNice(obj):
 	return repr(obj)+"\n"
@@ -43,13 +57,17 @@ try:
 					newSpeed2 = 250.0*j.get_axis(0)
 					s.sendall(reprNice({"command" : "FB", "speed" : newSpeed1}))
 					s.sendall(reprNice({"command" : "LR", "speed" : newSpeed2}))
-					#data = s.recv(1024)
-					#print('Received', repr(data))
+					
 				if e.type == pygame.JOYBUTTONDOWN:
 					newSpeed3 = 250.0*j.get_button(3) #button 
 					downSpeed = 250.0*j.get_button(0) #down button
 					s.sendall(reprNice({"command" : "U", "speed" : newSpeed3}))
 					s.sendall(reprNice({"command" : "D", "speed" : downSpeed}))
+					
+				serverMsg = recvNice(1024) #Not sure if I did this right or if it should be in the loop?
+				litserverMsg = literal_eval(serverMsg)
+				print(litserverMsg["message"])
+				#print('Received', repr(data))
 					
 		except KeyboardInterrupt:
 			j.quit()
