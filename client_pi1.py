@@ -40,7 +40,7 @@ try:
 			for e in myEvents:
 				if e.type == pygame.JOYAXISMOTION:
 					newSpeed1 = -250.0*j.get_axis(4)
-					newSpeed2 = -250.0*j.get_axis(0)
+					newSpeed2 = 250.0*j.get_axis(0)
 					s.sendall(reprNice({"command" : "FB", "speed" : newSpeed1}))
 					s.sendall(reprNice({"command" : "LR", "speed" : newSpeed2}))
 					#data = s.recv(1024)
