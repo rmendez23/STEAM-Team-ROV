@@ -30,6 +30,7 @@ print('Connected by', addr)
 newSpeed1 = 0.0
 newSpeed2 = 0.0
 newSpeed3 = 0.0
+downSpeed = 0.0
 while True:
 	#literal_eval to turn the TCP message back into a dictionary.
 	command = recvNice(conn) #Recieve data from socket
