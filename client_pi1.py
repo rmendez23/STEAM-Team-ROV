@@ -64,9 +64,9 @@ try:
 					s.sendall(reprNice({"command" : "U", "speed" : newSpeed3}))
 					s.sendall(reprNice({"command" : "D", "speed" : downSpeed}))
 					
-				serverMsg = recvNice(1024) #Not sure if I did this right or if it should be in the loop?
+				serverMsg = recvNice(1024) #Not sure if I did this right. Do I need a loop?
 				litserverMsg = literal_eval(serverMsg)
-				print(litserverMsg["message"])
+				print(litserverMsg["message"], litserverMsg["speed"])
 				#print('Received', repr(data))
 					
 		except KeyboardInterrupt:
