@@ -29,7 +29,7 @@ def recvNice(conn):
 	idx = recvBuf.find("\n")
 	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
 	if idx<1:
-		data = conn.recv(1024)
+		data = conn.recv(1024) #s.recv(1024)?
 		#print("data '"+data+"'")
 		recvBuf = recvBuf + data
 		return recvNice(conn)
