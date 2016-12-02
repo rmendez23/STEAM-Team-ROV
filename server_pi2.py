@@ -109,7 +109,7 @@ while True:
 		print("Going Up!", newSpeed3)
 		conn.sendall(reprNice({"message":["Going Up!"], "speed" : [newSpeed3]}))
 
-	if downSpeed>0: #DOWN
+	elif downSpeed>0: #DOWN
 		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
 		print("Going Down!", downSpeed)
 		conn.sendall(reprNice({"message":["Going Down!"], "speed" : [downSpeed]}))
@@ -117,4 +117,6 @@ while True:
 	else: #RELEASE
 		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 		print("No action, waiting for command.")
+		conn.sendall(reprNice({"message":["No action, Waiting for command."], "speed" : [0.0]}))
+
 conn.close() #move this?
