@@ -1,6 +1,5 @@
 import pygame
 pygame.init()
-pygame.display.init()
 
 # Set the width and height of the screen [width, height]
 SCREEN_WIDTH = 800
@@ -14,25 +13,25 @@ pygame.display.set_caption("STEAM Team ROV Console")
 clock = pygame.time.Clock()
 #Set font
 font = pygame.font.Font(None, 36)
-text = font.render("Hello There", 1, (60,200,40))
+text = font.render(message, 1, (60,200,40))
 textpos = (310,230) #text.get_rect(center=(100,100))
 #textpos.centerx = screen.get_rect().centerx
 
-def initGUI():
-      for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                  pygame.display.quit()
-      pygame.draw.rect(screen, (60,200,40),(280,200,300,200), 10)
-      text = font.render("Hello There", 1, (60,100,80))
-      screen.blit(text, textpos)
-      # --- Update the screen with what we've drawn.
-      pygame.display.flip()
-      # --- Limit to 60 frames per second
-      clock.tick(60)
+def initGUI(message):
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			pygame.display.quit()
+	pygame.draw.rect(screen, (60,200,40),(280,200,300,200), 10)
+	text = font.render(str(message), 1, (60,100,80))
+	screen.blit(text, textpos)
+	# --- Update the screen with what we've drawn.
+	pygame.display.flip()
+	# --- Limit to 60 frames per second
+	clock.tick(60)
 
 # Loop until the user clicks the close button.
 while True:
-        initGUI()
+	initGUI()
 	# Close the window and quit.
 pygame.quit()
 exit() # Needed when using IDLE
