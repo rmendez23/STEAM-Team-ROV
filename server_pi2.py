@@ -3,7 +3,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
 import atexit
 import socket
 from ast import literal_eval
-#do I need to import pygame?
+import ROVCommands.py #Functions for Fwd, bckwd, etc...
 
 recvBuf = ''
 
@@ -33,27 +33,7 @@ newSpeed1 = 0.0
 newSpeed2 = 0.0
 newSpeed3 = 0.0
 downSpeed = 0.0
-while True:
-	#literal_eval to turn the TCP message back into a dictionary.
-	command = recvNice(conn) #Recieve data from socket
-	#print("'"+command+"'")
-	dictCommand = literal_eval(command)
-	if dictCommand["command"] == "FB": #Forward or Backward
-		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
-		#print("'"+command+"'")
-	elif dictCommand["command"] == "LR":
-		newSpeed2 = float(dictCommand["speed"]) #Right or Left
-		#print("'"+command+"'")
-	elif dictCommand["command"] == "U":
-		newSpeed3 = float(dictCommand["speed"]) #Up
-		#print("'"+command+"'")
-	elif dictCommand["command"] == "D":
-		downSpeed = float(dictCommand["speed"]) #Down
-		#print("'"+command+"'")
-		
-	#if not newSpeed: break #what should I do here?
-	#conn.sendall(newSpeed1) # This sends the data recieved back to the client? Is this needed?
-	
+while True:	
 	# create a default object, no changes to I2C address or frequency
 	mh = Adafruit_MotorHAT(addr=0x60)
 
@@ -74,49 +54,32 @@ while True:
 	myMotor3.setSpeed(0)
 	myMotor2.setSpeed(0)
 	myMotor1.setSpeed(0) #UD Motor
-
-	#FORWARD and BACKWARD
-	if newSpeed1<0: #BOTH BACKWARD
-		myMotor3.run(Adafruit_MotorHAT.BACKWARD), myMotor2.run(Adafruit_MotorHAT.BACKWARD)
-		print ("Backward!", newSpeed1)
-		myMotor3.setSpeed(int(-newSpeed1)), myMotor2.setSpeed(int(-newSpeed1))
-		conn.sendall(reprNice({"message":["Backward!"], "speed" : [newSpeed1]}))
-
-	elif newSpeed1>0: #BOTH FORWARD
-		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.FORWARD)
-		print ("Forward!", newSpeed1)
-		myMotor3.setSpeed(int(newSpeed1)), myMotor2.setSpeed(int(newSpeed1))
-		conn.sendall(reprNice({"message":["Forward!"], "speed" : [newSpeed1]}))
-		
-	#RIGHT and LEFT
-	if newSpeed2<0: #LEFT
-		myMotor3.run(Adafruit_MotorHAT.FORWARD), myMotor2.run(Adafruit_MotorHAT.RELEASE)
-		print (newSpeed2)
-		myMotor3.setSpeed(int(-newSpeed2))
-		print("Turning left!", newSpeed2)
-		conn.sendall(reprNice({"message":["Turning Left!"], "speed" : [newSpeed2]}))
-		
-	elif newSpeed2>0: #RIGHT
-		myMotor2.run(Adafruit_MotorHAT.FORWARD), myMotor3.run(Adafruit_MotorHAT.RELEASE)
-		print (newSpeed2)
-		myMotor2.setSpeed(int(newSpeed2))
-		print("Turning right!", newSpeed2)
-		conn.sendall(reprNice({"message":["Turning Right!"], "speed" : [newSpeed2]}))
-
-	#UP and DOWN
-	if newSpeed3>0: #UP
-		myMotor1.run(Adafruit_MotorHAT.FORWARD)
-		print("Going Up!", newSpeed3)
-		conn.sendall(reprNice({"message":["Going Up!"], "speed" : [newSpeed3]}))
-
-	elif downSpeed>0: #DOWN
-		myMotor1.run(Adafruit_MotorHAT.BACKWARD)
-		print("Going Down!", downSpeed)
-		conn.sendall(reprNice({"message":["Going Down!"], "speed" : [downSpeed]}))
-
+	
+	#literal_eval to turn the TCP message back into a dictionary.
+	command = recvNice(conn) #Recieve data from socket
+	dictCommand = literal_eval(command)
+	if dictCommand["command"] == "FB": #Forward or Backward
+		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
+		if newSpeed1<0: #BOTH BACKWARD
+			ROVbackward()
+		elif newSpeed1>0: #BOTH FORWARD	
+			ROVforward()
+	elif dictCommand["command"] == "LR":
+		newSpeed2 = float(dictCommand["speed"]) #Right or Left
+		if newSpeed2<0: #LEFT
+			ROVleft()
+		elif newSpeed2>0: #RIGHT
+			ROVright()
+	elif dictCommand["command"] == "U":
+		newSpeed3 = float(dictCommand["speed"]) #Up
+		if newSpeed3>0: #UP
+			ROVup()
+	elif dictCommand["command"] == "D":
+		downSpeed = float(dictCommand["speed"]) #Down
+		if downSpeed>0: #DOWN
+			ROVdown()
 	else: #RELEASE
-		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
-		print("No action, waiting for command.")
-		conn.sendall(reprNice({"message":["No action, Waiting for command."], "speed" : [0.0]}))
+		ROVnoAction()
+
 
 conn.close() #move this?
