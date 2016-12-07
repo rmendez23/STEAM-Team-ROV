@@ -52,9 +52,11 @@ try:
 					s.sendall(reprNice({"command" : "LR", "speed" : newSpeed2}))
 					
 				if e.type == pygame.JOYBUTTONDOWN:
-					newSpeed3 = 250.0*j.get_button(3) #button 
+					upSpeed = 250.0*j.get_button(3) #button 
 					downSpeed = 250.0*j.get_button(0) #down button
-					s.sendall(reprNice({"command" : "U", "speed" : newSpeed3}))
+					print (upSpeed)
+					print (downSpeed)
+					s.sendall(reprNice({"command" : "U", "speed" : upSpeed}))
 					s.sendall(reprNice({"command" : "D", "speed" : downSpeed}))
 					
 				serverMsg = recvNice(1024) #Not sure if I did this right. Do I need a loop?
