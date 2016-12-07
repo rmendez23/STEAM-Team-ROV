@@ -61,23 +61,23 @@ while True:
 	if dictCommand["command"] == "FB": #Forward or Backward
 		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
 		if newSpeed1<0: #BOTH BACKWARD
-			ROVbackward()
+			ROVCommands.ROVbackward()
 		elif newSpeed1>0: #BOTH FORWARD	
-			ROVforward()
+			ROVCommands.ROVforward()
 	elif dictCommand["command"] == "LR":
 		newSpeed2 = float(dictCommand["speed"]) #Right or Left
 		if newSpeed2<0: #LEFT
-			ROVleft()
+			ROVCommands.ROVleft()
 		elif newSpeed2>0: #RIGHT
-			ROVright()
+			ROVCommands.ROVright()
 	elif dictCommand["command"] == "U":
 		newSpeed3 = float(dictCommand["speed"]) #Up
 		if newSpeed3>0: #UP
-			ROVup()
+			ROVCommands.ROVup()
 	elif dictCommand["command"] == "D":
 		downSpeed = float(dictCommand["speed"]) #Down
 		if downSpeed>0: #DOWN
-			ROVdown()
+			ROVCommands.ROVdown()
 	else: #RELEASE
 		ROVnoAction()
 
