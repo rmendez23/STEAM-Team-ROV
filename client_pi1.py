@@ -17,15 +17,15 @@ j.init()
 print 'Initialized Joystick : %s' % j.get_name()
 
 recvBuf = ''
-def recvNice(conn):
+def recvNice(s):
 	global recvBuf
 	idx = recvBuf.find("\n")
 	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
 	if idx<1:
-		data = conn.recv(1024) #s.recv(1024)?
+		data = s.recv(1024) #s.recv(1024)?
 		#print("data '"+data+"'")
 		recvBuf = recvBuf + data
-		return recvNice(conn)
+		return recvNice(s)
 	ret = recvBuf[:idx]
 	recvBuf = recvBuf[(idx+1):]
 	return ret
