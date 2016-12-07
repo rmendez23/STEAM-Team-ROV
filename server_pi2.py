@@ -56,7 +56,7 @@ while True:
 	myMotor1.setSpeed(0) #UD Motor
 	
 	#literal_eval to turn the TCP message back into a dictionary.
-	command = recvNice(conn) #Recieve data from socket
+	command = recvNice(s) #Recieve data from socket
 	dictCommand = literal_eval(command)
 	if dictCommand["command"] == "FB": #Forward or Backward
 		newSpeed1 = float(dictCommand["speed"]) #turn speed to a float
