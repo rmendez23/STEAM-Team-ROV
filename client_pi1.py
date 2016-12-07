@@ -56,9 +56,9 @@ try:
 					downSpeed = 250.0*j.get_button(0) #down button
 					print (upSpeed)
 					print (downSpeed)
-					if (j.get_button(3))
+					if (j.get_button(3)):
 						s.sendall(reprNice({"command" : "U", "speed" : 250.0}))
-					elif (j.get_button(0))
+					elif (j.get_button(0)):
 						s.sendall(reprNice({"command" : "D", "speed" : 250.0}))
 					
 				serverMsg = recvNice(1024) #Not sure if I did this right. Do I need a loop?
