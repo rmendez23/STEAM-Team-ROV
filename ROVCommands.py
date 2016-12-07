@@ -1,3 +1,5 @@
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
+
 #FORWARD and BACKWARD
 def ROVbackward(myMotor3, myMotor2, myMotor1):
 	myMotor3.run(Adafruit_MotorHAT.BACKWARD), myMotor2.run(Adafruit_MotorHAT.BACKWARD)
