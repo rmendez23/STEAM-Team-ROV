@@ -38,7 +38,7 @@ def ROVdown():
 	conn.sendall(reprNice({"message":["Going Down!"], "speed" : [downSpeed]}))
 
 def ROVnoAction():
-	else: #RELEASE ALL Motors
+	#RELEASE ALL Motors
 		myMotor3.run(Adafruit_MotorHAT.RELEASE), myMotor2.run(Adafruit_MotorHAT.RELEASE)
 		print("No action, waiting for command.")
 		conn.sendall(reprNice({"message":["No action, Waiting for command."], "speed" : [0.0]}))
