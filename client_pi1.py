@@ -6,7 +6,7 @@ import time
 import sys
 from ast import literal_eval
 import socket
-import ROVDisplay.py #for the GUI
+import ROVDisplay #for the GUI
 
 '''
 Gets joystick data and prints it
