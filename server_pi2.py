@@ -3,7 +3,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
 import atexit
 import socket
 from ast import literal_eval
-import ROVCommands.py #Functions for Fwd, bckwd, etc...
+import ROVCommands #Functions for Fwd, bckwd, etc...
 
 recvBuf = ''
 
