@@ -9,12 +9,12 @@ recvBuf = ''
 
 def recvNice(conn):
 	global recvBuf
-	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
 	while (recvBuf.find("\n")<0):
 		data = conn.recv(1024)
 		print("data '"+`len(data)`+"'")
 		recvBuf = recvBuf + data
 	idx = recvBuf.find("\n")
+	print("idx "+`idx`+" ; len = "+`len(recvBuf)`)
 	ret = recvBuf[:idx]
 	recvBuf = recvBuf[(idx+1):]
 	return ret
