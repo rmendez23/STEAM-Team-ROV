@@ -11,6 +11,8 @@ def recvNice(conn):
 	global recvBuf
 	while (recvBuf.find("\n")<0):
 		data = conn.recv(1024)
+		if (len(data) == 0):
+			raise ValueError("No data recieved - client disconnected")
 		print("data '"+`len(data)`+"'")
 		recvBuf = recvBuf + data
 	idx = recvBuf.find("\n")
