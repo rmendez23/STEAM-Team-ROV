@@ -57,7 +57,7 @@ try:
 					s.sendall(reprNice({"command" : "U", "speed" : upSpeed}))
 					s.sendall(reprNice({"command" : "D", "speed" : downSpeed}))
 					
-				serverMsg = recvNice(1024) #Not sure if I did this right. Do I need a loop?
+				serverMsg = recvNice(s) #Not sure if I did this right. Do I need a loop?
 				litserverMsg = literal_eval(serverMsg)
 				print(litserverMsg["message"], litserverMsg["speed"])
 				initGUI(litserverMsg["message"])
