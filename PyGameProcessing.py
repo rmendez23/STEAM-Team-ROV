@@ -1,3 +1,6 @@
+import pygame
+#I know there will be other imports for data transmission, but those will be added when this is merged with roy's code
+
 pygame.init()
 pygame.event.set_allowed(pygame.JOYAXISMOTION)
 stick = pygame.joysick.Joystick(0)
@@ -14,3 +17,5 @@ try:
     sendData(1, MotorR)
     sendData(2, MotorV)
 except KeyboardInterrupt:
+  stick.quit()
+  pygame.quit()
