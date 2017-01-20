@@ -78,9 +78,10 @@ newSpeed1 = 0.0
 newSpeed2 = 0.0
 newSpeed3 = 0.0
 downSpeed = 0.0
+mh = Adafruit_MotorHAT(addr=0x60)
+
 while True:	
 	# create a default object, no changes to I2C address or frequency
-	mh = Adafruit_MotorHAT(addr=0x60)
 
 	# recommended for auto-disabling motors on shutdown!
 	def turnOffMotors():
