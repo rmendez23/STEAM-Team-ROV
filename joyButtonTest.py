@@ -11,7 +11,9 @@ try:
     fb = stick.get_axis(1)
     lr = stick.get_axis(0)
     ud = stick.get_axis(4)
-    print ({fb,lr,ud})
+    print ("forward/backward: " + fb)
+    print ("left/right: " + lr)
+    print ("up/down: " + ud)
 except KeyboardInterrupt:
   stick.quit()
   pygame.quit()
