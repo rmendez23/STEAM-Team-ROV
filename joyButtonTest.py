@@ -3,7 +3,7 @@ import pygame
 
 pygame.init()
 pygame.event.set_allowed(pygame.JOYAXISMOTION)
-stick = pygame.joysick.Joystick(0)
+stick = pygame.joystick.Joystick(0)
 stick.init()
 try:
   while true:
