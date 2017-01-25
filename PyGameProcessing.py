@@ -13,9 +13,7 @@ try:
     motorL = int((fb+lr)*250)
     motorR = int((fb-lr)*250)
     motorV = stick.get_axis(4)
-    sendData(0, MotorL)
-    sendData(1, MotorR)
-    sendData(2, MotorV)
+    print ({motorL, motorR, motorV})
 except KeyboardInterrupt:
   stick.quit()
   pygame.quit()
