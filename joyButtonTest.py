@@ -3,17 +3,17 @@ import pygame
 
 pygame.init()
 pygame.event.set_allowed(pygame.JOYAXISMOTION)
-stick = pygame.joysick.Joystick(0)
+stick = pygame.joystick.Joystick(0)
 stick.init()
 try:
-  while true:
+  while True:
     event = pygame.event.wait()
     fb = stick.get_axis(1)
     lr = stick.get_axis(0)
-    motorL = int((fb+lr)*250)
-    motorR = int((fb-lr)*250)
-    motorV = stick.get_axis(4)
-    print ({motorL, motorR, motorV})
+    ud = stick.get_axis(4)
+    print ("forward/backward: " + fb)
+    print ("left/right: " + lr)
+    print ("up/down: " + ud)
 except KeyboardInterrupt:
   stick.quit()
   pygame.quit()
