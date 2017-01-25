@@ -6,7 +6,7 @@ pygame.event.set_allowed(pygame.JOYAXISMOTION)
 stick = pygame.joystick.Joystick(0)
 stick.init()
 try:
-  while true:
+  while True:
     event = pygame.event.wait()
     fb = stick.get_axis(1)
     lr = stick.get_axis(0)
