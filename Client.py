@@ -1,20 +1,38 @@
-#client_pi1.py
-#!/usr/bin/python
+#!/usr/bin/python2.7
 import Common
 import time
 import sys
 from ast import literal_eval
 import socket
 import time
+if Common.DEBUG:
+  import pygameFake as pygame
+else:
+  import pygame
 
-s = None
-
-#client socket
+#client socket, connects to server
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket object
 s.connect(Common.addrTuple) #connect to server
 
-while (True):
-	s.sendall(Common.reprNice( (1,1,1,1) ))
-	print("sent")
-	time.sleep(1)
+def sendObject(obj):
+  global s
+  s.sendall( Common.reprNice(obj) )
+
+pygame.init()
+pygame.event.set_allowed(pygame.JOYAXISMOTION)
+stick = pygame.joystick.Joystick(0)
+stick.init()
+
+try:
+  while True:
+    event = pygame.event.wait()
+    fb = stick.get_axis(1)
+    lr = stick.get_axis(0)
+    motorL = int((-fb+lr)*250)
+    motorR = int((-fb-lr)*250)
+    motorV = stick.get_axis(4)*250
+    sendObject( (motorL, motorR, motorV, 0) )
+except KeyboardInterrupt:
+  stick.quit()
+  pygame.quit()
 
